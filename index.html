@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Alarm Futuristik — Rio.co.id</title>
+<style>
+:root{--card-bg:#111;--text:#fff;}
+html,body{height:100%;margin:0;font-family:Inter, "Segoe UI", Roboto, sans-serif;}
+body{
+  display:flex;align-items:center;justify-content:center;padding:18px;
+  background: linear-gradient(120deg,#ff2b2b 0%, #fff5f5 50%, #ff2b2b 100%);
+  background-size: 300% 300%;animation: bgShift 12s ease-in-out infinite;
+}
+@keyframes bgShift{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
+.card{
+  width:100%;max-width:480px;border-radius:16px;padding:18px;
+  background: var(--card-bg); box-shadow:0 12px 40px rgba(0,0,0,0.08);
+  position:relative;overflow:hidden; transition:all 0.3s ease; color:var(--text);
+}
+.illum{position:absolute; inset:0; pointer-events:none; opacity:0; mix-blend-mode: screen; transition: opacity 80ms linear, background 80ms linear;}
+h1{
+  margin:0 0 6px 0;font-size:22px;text-align:center;color:#ff2b2b;
+  text-shadow:0 0 8px #ff2b2b,0 0 16px #fff,0 0 24px #ff2b2b;letter-spacing:1px;
+}
+#clock{
+  font-size:32px;font-weight:700;text-align:center;color:#fff;
+  text-shadow:0 0 6px #ff2b2b,0 0 12px #fff,0 0 18px #ff2b2b;
+  margin:6px 0 12px;
+}
+label{display:block;font-size:13px;margin:8px 0 6px;color:#ccc;}
+.input,select{
+  width:100%;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.15);
+  background:#222;color:#fff;font-size:15px;outline:none;box-sizing:border-box;
+}
+.small-controls{display:flex;gap:8px;margin-top:10px;}
+.small-controls button{flex:1;padding:10px;border-radius:10px;border:none;font-weight:700;cursor:pointer;}
+.previewBtn{background:linear-gradient(90deg,#ff2b2b,#fff);color:#111;border:1px solid rgba(255,43,43,0.12);}
+.stopPreviewBtn{background:#333;color:#fff;border:1px solid rgba(0,0,0,0.06);}
+.controls{display:flex;gap:8px;margin-top:12px;}
+.controls button{flex:1;padding:11px;border-radius:12px;border:none;font-weight:800;cursor:pointer;}
+.btnPrimary{background:linear-gradient(90deg,#fff,#ffefef);color:#111;border:1px solid rgba(255,43,43,0.12);}
+.btnSet{background:linear-gradient(90deg,#ff2b2b,#000 70%);color:#fff;}
+.btnStop{background:#444;color:#fff;border:1px solid rgba(0,0,0,0.06);}
+#status{margin-top:12px;font-size:14px;text-align:center;color:#ccc;min-height:22px;}
+#developer{margin-top:14px;font-size:13px;text-align:center;color:rgba(255,255,255,0.6);font-weight:300;}
+.card.active{transform:translateY(-3px);box-shadow:0 18px 60px rgba(255,43,43,0.2);}
+@media(max-width:460px){.card{padding:14px;}#clock{font-size:28px;}}
+</style>
+</head>
+<body>
+<div class="card" id="card">
+  <div class="illum" id="illum"></div>
+  <h1 id="title">⏰ Alarm Futuristik</h1>
+  <div id="clock">00:00:00</div>
+  <label for="alarmTime">Setel Waktu Alarm (jam:menit)</label>
+  <input id="alarmTime" class="input" type="time" />
+  <label for="songSelect">Pilih Nada Bawaan (20+)</label>
+  <select id="songSelect" class="input">
+    <option value="">-- Pilih Nada Bawaan --</option>
+  <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">Nada 01</option>
+  <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3">Nada 02</option>
+  <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3">Nada 03</option>
+  <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3">Nada 04</option>
+  <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3">Nada 05</option>
+  <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3">Nada 06</option>
+  <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3">Nada 07</option>
+  <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3">Nada 08</option>
+  <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3">Nada 09</option>
+  <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3">Nada 10</option>
+  <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-11.mp3">Nada 11</option>
+  <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-12.mp3">Nada 12</option>
+  <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-13.mp3">Nada 13</option>
+  <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-14.mp3">Nada 14</option>
+  <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-15.mp3">Nada 15</option>
+  <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-16.mp3">Nada 16</option>
+  <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-17.mp3">Nada 17</option>
+  <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-18.mp3">Nada 18</option>
+  <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-19.mp3">Nada 19</option>
+  <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-20.mp3">Nada 20</option>
+  <!-- 20 tambahan -->
+  <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-21.mp3">Nada 21</option>
+  <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-22.mp3">Nada 22</option>
+  <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-23.mp3">Nada 23</option>
+  <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-24.mp3">Nada 24</option>
+  <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-25.mp3">Nada 25</option>
+  <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-26.mp3">Nada 26</option>
+  <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-27.mp3">Nada 27</option>
+  <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-28.mp3">Nada 28</option>
+  <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-29.mp3">Nada 29</option>
+  <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-30.mp3">Nada 30</option>
+  <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-31.mp3">Nada 31</option>
+  <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-32.mp3">Nada 32</option>
+  <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-33.mp3">Nada 33</option>
+  <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-34.mp3">Nada 34</option>
+  <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-35.mp3">Nada 35</option>
+  <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-36.mp3">Nada 36</option>
+  <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-37.mp3">Nada 37</option>
+  <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-38.mp3">Nada 38</option>
+  <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-39.mp3">Nada 39</option>
+  <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-40.mp3">Nada 40</option>
+</select>
+  </select>
+  <label for="upload">Atau Upload Lagu Sendiri</label>
+  <input id="upload" class="input" type="file" accept="audio/*" />
+  <div class="small-controls">
+    <button class="previewBtn" id="previewBtn">▶ Preview</button>
+    <button class="stopPreviewBtn" id="stopPreviewBtn">⏹ Stop Preview</button>
+  </div>
+  <div class="controls">
+    <button class="btnPrimary" id="activateBtn">Aktifkan Audio/Notif</button>
+    <button class="btnSet" id="setBtn">Set Alarm</button>
+    <button class="btnStop" id="stopBtn">Stop Alarm</button>
+  </div>
+  <div id="status">Status: Alarm belum diaktifkan</div>
+  <div id="developer">Developer: Rio.co.id</div>
+</div>
+<script>
+const clockEl=document.getElementById('clock');
+const statusEl=document.getElementById('status');
+const card=document.getElementById('card');
+const illum=document.getElementById('illum');
+const title=document.getElementById('title');
+const alarmTimeInput=document.getElementById('alarmTime');
+const songSelect=document.getElementById('songSelect');
+const uploadInput=document.getElementById('upload');
+const previewBtn=document.getElementById('previewBtn');
+const stopPreviewBtn=document.getElementById('stopPreviewBtn');
+const activateBtn=document.getElementById('activateBtn');
+const setBtn=document.getElementById('setBtn');
+const stopBtn=document.getElementById('stopBtn');
+
+let previewAudio=null,alarmAudio=null,alarmSetTime=null,alarmActive=false,repeatPauseTimer=null,vibrateInterval=null;
+let audioCtx=null,analyser=null,sourceNode=null,rafId=null;
+
+function updateClock(){
+  const now=new Date();
+  clockEl.textContent=String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0')+':'+String(now.getSeconds()).padStart(2,'0');
+  if(alarmActive&&alarmSetTime){
+    const hhmm=String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');
+    if(hhmm===alarmSetTime&&now.getSeconds()===0){
+      if(!alarmAudio||alarmAudio.paused) startAlarmCycle();
+    }
+  }
+}
+setInterval(updateClock,1000);updateClock();
+
+function unlockAudio(){if(audioCtx)return;const Ctx=window.AudioContext||window.webkitAudioContext;audioCtx=new Ctx();}
+function createAudio(source){const a=new Audio();a.crossOrigin="anonymous";a.loop=false;if(typeof source==='string')a.src=source;else a.src=URL.createObjectURL(source);return a;}
+function attachAnalyzer(el){try{if(!audioCtx)unlockAudio();if(sourceNode){sourceNode.disconnect();sourceNode=null;}sourceNode=audioCtx.createMediaElementSource(el);analyser=audioCtx.createAnalyser();analyser.fftSize=512;sourceNode.connect(analyser);analyser.connect(audioCtx.destination);return analyser;}catch(e){console.warn(e);return null;}}
+function startVisualizer(){if(!analyser)return;const data=new Uint8Array(analyser.frequencyBinCount);function loop(){analyser.getByteFrequencyData(data);let sum=0;for(let i=0;i<data.length;i++)sum+=data[i];const rms=sum/data.length;const intensity=Math.min(1,rms/80);const colors=['#AA55FF','#00FF88','#FFFF33','#00AAFF','#FF2B2B'];let color=colors[Math.floor(intensity*colors.length)%colors.length];card.style.background=color;illum.style.background=`radial-gradient(circle at 30% 30%, ${color} 0%, rgba(0,0,0,0) 70%)`;rafId=requestAnimationFrame(loop);}rafId=requestAnimationFrame(loop);}
+function stopVisualizer(){if(rafId)cancelAnimationFrame(rafId);rafId=null;analyser=null;illum.style.opacity=0;illum.style.background='';card.style.background='#111';}
+
+previewBtn.addEventListener('click',()=>{stopPreview();const file=uploadInput.files[0];if(file)previewAudio=createAudio(file);else if(songSelect.value)previewAudio=createAudio(songSelect.value);else{alert('Pilih nada atau upload');return;}previewAudio.play();attachAnalyzer(previewAudio);startVisualizer();statusEl.textContent='Memutar preview...';});
+stopPreviewBtn.addEventListener('click',stopPreview);
+function stopPreview(){try{if(previewAudio){previewAudio.pause();previewAudio.currentTime=0;previewAudio=null;}}catch(e){}stopVisualizer();statusEl.textContent=alarmActive?`Alarm aktif untuk ${alarmSetTime}`:'Preview dihentikan';}
+
+activateBtn.addEventListener('click',()=>{unlockAudio();statusEl.textContent='Siap — tekan Set Alarm';});
+setBtn.addEventListener('click',()=>{const t=alarmTimeInput.value;if(!t){alert('Pilih waktu alarm');return;}const file=uploadInput.files[0];const url=songSelect.value;if(!file&&!url){alert('Pilih nada atau upload');return;}if(file)alarmAudio=createAudio(file);else alarmAudio=createAudio(url);attachAnalyzer(alarmAudio);alarmSetTime=t;alarmActive=true;statusEl.textContent=`Alarm aktif untuk ${alarmSetTime}`;});
+function startAlarmCycle(){if(!alarmActive||!alarmAudio)return;alarmAudio.play();startVisualizer();card.classList.add('active');if('vibrate' in navigator)vibrateInterval=setInterval(()=>navigator.vibrate([700,300,700]),1600);statusEl.textContent='Alarm Berbunyi — tekan STOP';alarmAudio.onended=()=>{card.classList.remove('active');stopVisualizer();if(vibrateInterval){clearInterval(vibrateInterval);vibrateInterval=null;navigator.vibrate&&navigator.vibrate(0);}if(alarmActive){repeatPauseTimer=setTimeout(()=>{if(alarmAudio){alarmAudio.currentTime=0;}startAlarmCycle();},180000);}}}
+function stopAlarm(){alarmActive=false;alarmSetTime=null;try{if(alarmAudio){alarmAudio.pause();alarmAudio.currentTime=0;alarmAudio.onended=null;}}catch(e){}if(previewAudio){try{previewAudio.pause();previewAudio.currentTime=0;previewAudio=null;}catch(e){}}if(repeatPauseTimer){clearTimeout(repeatPauseTimer);repeatPauseTimer=null;}if(vibrateInterval){clearInterval(vibrateInterval);vibrateInterval=null;navigator.vibrate&&navigator.vibrate(0);}stopVisualizer();card.classList.remove('active');statusEl.textContent='Alarm dihentikan';}
+stopBtn.addEventListener('click',stopAlarm);
+</script>
+</body>
+</html>
